@@ -65,6 +65,26 @@ h1 {
   font-size: 5.5rem;
 }
 
+a {
+  position: relative;
+  text-decoration: none;
+}
+
+a::after {
+  content: "";
+  position: absolute;
+  top: 32px;
+  left: 0;
+  width: 0;
+  height: 1.5px; 
+  background-color: white;
+  transition: width 0.2s ease-out;
+}
+
+a:hover::after {
+  width: 100%;
+}
+
 
 @media (max-width: 840px) {
   h1 {

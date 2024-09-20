@@ -4,16 +4,19 @@ import { twMerge } from "tailwind-merge";
 interface secondaryButtonProps {
   children: React.ReactNode;
   className?: string;
+  onClick: () => void;
 }
 
 export default function SecondaryButton({
   children,
   className,
+  onClick,
 }: secondaryButtonProps) {
   return (
     <button
+      onClick={onClick}
       className={twMerge(
-        "relative overflow-hidden border-[1.5px] border-white uppercase h-12 px-6 text-xs truncate w-fit group",
+        "relative overflow-hidden border-[1.5px] border-white uppercase h-10 px-5 text-xs truncate w-fit group",
         className
       )}
     >

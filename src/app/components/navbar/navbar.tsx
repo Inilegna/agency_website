@@ -2,13 +2,13 @@
 
 import { DATA } from "@/app/content";
 import React, { useState } from "react";
-import SecondaryButton from "../buttons/secondaryButton";
 import {
   ArrowUpRightIcon,
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { Variants, motion } from "framer-motion";
+import SecondaryButton from "../buttons/SecondaryButton";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +26,7 @@ export default function Navbar() {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.2, // Durée de l'animation
+        duration: 0.2,
         when: "beforeChildren", // Attendre que le conteneur soit visible avant d'animer les items
         staggerChildren: 0.1, // Décalage entre chaque item
       },
@@ -53,7 +53,7 @@ export default function Navbar() {
 
   return (
     <div className="w-full flex justify-between items-center text-white uppercase font-HKMedium py-6">
-      <p className="font-bold z-40">ONYXCAPTURE</p>
+      <p className="font-bold z-40">Anaël Angelini</p>
 
       {/* Menu burger pour mobile */}
       <button
@@ -70,11 +70,21 @@ export default function Navbar() {
       {/* Navigation et bouton - cachés sur mobile */}
       <div className="hidden sm:flex space-x-12">
         {Object.entries(DATA.navbar.navitems).map(([key, item]) => (
-          <a key={key} href={item.url} className="text-xs flex items-center">
+          <a
+            key={key}
+            href={item.url}
+            target="_blank"
+            className="text-xs flex items-center"
+          >
             {item.name}
           </a>
         ))}
-        <SecondaryButton className="hidden navbarBreakpoint:block text-inherit">
+        <SecondaryButton
+          onClick={() =>
+            window.open(DATA.navbar.buttons.secondaryUrl, "_blank")
+          }
+          className="hidden navbarBreakpoint:block text-inherit"
+        >
           <span className="flex items-center gap-x-2">
             {DATA.navbar.buttons.secondaryButton}
             <ArrowUpRightIcon className="h-3 w-3 stroke-[3px]" />
