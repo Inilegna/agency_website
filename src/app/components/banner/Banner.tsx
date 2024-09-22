@@ -3,7 +3,7 @@ import React from "react";
 export default function Banner() {
   const bannertext = Array(16).fill("Scrollez pour voir la suite");
   return (
-    <div className="fixed bottom-2 z-10 flex items-center justify-start whitespace-nowrap">
+    <div className="fixed bottom-2 z-20 flex items-center justify-start whitespace-nowrap">
       <div className="w-full inline-flex flex-nowrap">
         <div className="flex animate-infinite-scroll">
           {bannertext.map((text, index) => (

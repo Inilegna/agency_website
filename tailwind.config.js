@@ -25,6 +25,7 @@ module.exports = {
       },
       colors: {
         'primaryColor' : '#1A181A',
+        'primaryColorLighter' : '#353135',
       },
       animation: {
         'infinite-scroll': 'infinite-scroll 100s linear infinite',
@@ -36,6 +37,12 @@ module.exports = {
         }
       }             
     },
+    variants: {
+      extend: {
+        backdropBlur: ['responsive'],
+      },
+    },
+  
   },
   plugins: [],
 }

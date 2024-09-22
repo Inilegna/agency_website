@@ -16,7 +16,7 @@ export default function SecondaryButton({
     <button
       onClick={onClick}
       className={twMerge(
-        "relative overflow-hidden border-[1.5px] border-white uppercase h-10 px-5 text-xs truncate w-fit group",
+        "relative overflow-hidden border-[1.5px] border-white uppercase h-12 sm:h-10 px-5 text-xs truncate w-fit group",
         className
       )}
     >

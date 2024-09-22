@@ -1,37 +1,45 @@
 "use client";
 import Banner from "@/app/components/banner/Banner";
+import SecondaryButton from "@/app/components/buttons/SecondaryButton";
 import { DATA } from "@/app/content";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
-import { motion, useTransform, useScroll } from "framer-motion";
-import React from "react";
+import { ArrowRightIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 export default function HeroSection() {
   const imgClassName = "opacity-70 h-6";
-  const { scrollYProgress } = useScroll();
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isClickable, setIsClickable] = useState(true);
+
+  function scaleToScreen() {
+    if (isClickable) {
+      setIsExpanded(true);
+      setIsClickable(false);
+    }
+  }
 
   return (
-    <section className="relative text-white uppercase text-center sm:text-start mt-14">
+    <section className="relative text-white uppercase text-center sm:text-start mt-32">
       {/* --- SUBHEADER ---- */}
-      <p className="z-10 font-HKLight text-[0.625rem] sm:text-xs md:-mb-2">
+      <p className="font-HKLight text-[0.625rem] sm:text-xs md:-mb-2">
         {DATA.heroSection.subheader}
       </p>
       {/* --- TITLE ---- */}
-      <div className="z-10 font-HKBold tracking-widest flex flex-col -space-y-3 md:-space-y-6 navbarBreakpoint:-space-y-8">
+      <div className="font-HKBold tracking-widest flex flex-col -space-y-3 md:-space-y-6 navbarBreakpoint:-space-y-8">
         <h1>{DATA.heroSection.headerBold}</h1>
         <h1 className="text-primaryColor outlinetext">
           {DATA.heroSection.headerLine}
         </h1>
       </div>
       {/* --- PRIMARY BUTTON & LOGOS --- */}
-      <div className="flex items-center gap-x-8 mt-5">
-        <button
-          className="relative bg-white text-primaryColor h-12 sm:h-16 sm:-ml-6 md:-ml-12 xl:-ml-0 md:pl-12 px-6 md:pr-6 xl:px-6 uppercase font-HKMedium text-xs text-start border-y-[1.5px] border-r-[1.5px] border-transparent overflow-hidden group" // Removed left border
-        >
-          <span className="flex items-center gap-x-2 relative z-10 group-hover:text-white">
+      <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-x-8 mt-5">
+        <button className="relative bg-white text-primaryColor h-12 sm:h-16 sm:-ml-6 md:-ml-12 xl:-ml-0 md:pl-12 px-6 md:pr-6 xl:px-6 uppercase font-HKMedium text-xs text-start border-y-[1.5px] border-r-[1.5px] border-l-[1.5px] sm:border-l-0 border-transparent overflow-hidden group">
+          <span className="flex items-center gap-x-2 relative group-hover:text-white">
             {DATA.heroSection.button}
             <ArrowRightIcon className="h-3 w-3 text-primaryColor group-hover:text-white stroke-[3px]" />
           </span>
-          <span className="absolute inset-0 bg-primaryColor transform scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100"></span>
+          <span className="absolute inset-0 bg-primaryColor transform scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100" />
         </button>
 
         {/* --- LOGOS ---- */}
@@ -50,12 +58,45 @@ export default function HeroSection() {
             ))}
           </ul>
         </div>
+        <SecondaryButton
+          className="mt-4 uppercase font-HKMedium text-xs sm:hidden"
+          onClick={() =>
+            window.open(DATA.navbar.buttons.secondaryUrl, "_blank")
+          }
+        >
+          <span className="flex items-center gap-x-2">
+            {DATA.navbar.buttons.secondaryButton}
+            <ArrowUpRightIcon className="h-3 w-3 stroke-[3px]" />
+          </span>
+        </SecondaryButton>
       </div>
-      <motion.div className="fixed bottom-0 right-0 bg-white h-40 w-1/2 md:w-72 p-6 z-0">
-        <p className="text-primaryColor text-xs font-HKMedium uppercase truncate">
+
+      <motion.div
+        onTap={scaleToScreen}
+        animate={{
+          width: isExpanded ? "100vw" : "",
+          height: isExpanded ? "100vh" : "",
+        }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+        whileHover={
+          !isExpanded
+            ? { scale: 1.1, transition: { duration: 0.2, ease: "linear" } }
+            : {}
+        }
+        className={`fixed bottom-0 right-0 bg-primaryColorLighter h-40 w-1/2 md:w-72 p-6 cursor-pointer ${
+          !isClickable && "pointer-events-none"
+        }`}
+      >
+        <p
+          className={twMerge(
+            "text-white text-xs font-HKMedium uppercase truncate text-start",
+            isExpanded ? "hidden" : ""
+          )}
+        >
           {DATA.heroSection.seeServices}
         </p>
       </motion.div>
+
       <Banner />
     </section>
   );
