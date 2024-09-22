@@ -35,7 +35,7 @@ export default function HeroSection() {
       {/* --- PRIMARY BUTTON & LOGOS --- */}
       <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-x-8 mt-5">
         <button className="relative bg-white text-primaryColor h-12 sm:h-16 sm:-ml-6 md:-ml-12 xl:-ml-0 md:pl-12 px-6 md:pr-6 xl:px-6 uppercase font-HKMedium text-xs text-start border-y-[1.5px] border-r-[1.5px] border-l-[1.5px] sm:border-l-0 border-transparent overflow-hidden group">
-          <span className="flex items-center gap-x-2 relative group-hover:text-white">
+          <span className="flex items-center gap-x-2 relative group-hover:text-white z-10">
             {DATA.heroSection.button}
             <ArrowRightIcon className="h-3 w-3 text-primaryColor group-hover:text-white stroke-[3px]" />
           </span>
